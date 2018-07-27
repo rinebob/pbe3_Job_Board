@@ -1,0 +1,34 @@
+For a red belt:
+
+Login and Registration with validations
+Validation errors should appear on the page
+Logout feature
+
+Dashboard
+"Cancel" link appears if the logged user is the one who created the job
+"Cancel" link removes the job from the database
+"Edit" link appears if the logged user is the one who created the job
+"Edit" link routes to the edit page
+Dashboard should say "Welcome {{user}}"
+"View" link routes to the individual job page
+Add a job
+Validation for empty input fields
+Title must be greater than three characters long
+Description must be greater than ten characters long
+HTML and CSS reflect the wireframe to at least 75% accuracy
+
+For a black belt:
+
+You must be able to deploy your work to Amazon EC2 and provide the IP address or subdomain/domain name to where your work has been deployed
+ Please note that Heroku deployment is not honored
+"Add" link must add the job to the My Jobs list that is unique to the user
+When a job is added, it must also be removed from the jobs table
+"Add To My Jobs" link on the individual job page must do the same as the "Add" link on the dashboard
+Edit page input fields must be pre-populated with current data from the database
+Done link on the user's My Jobs list deletes the job from the database
+Also:
+Create a short video walking through the features of your app. Show your validations working. There is no need to speak or show your code.
+Remove your github repo after deploying.
+The wireframe is available for download here.
+Don’t worry about:
+What the prompts are asking for. Just ask if you are unsure about what the goals are!

@@ -1,0 +1,111 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta last_name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+        *{
+            border: 1px solid black;
+        }
+        .errmsg{
+            color: red;
+            text-emphasis-style: bold;
+        }
+        
+    </style>
+   <title>Belt 2 Add Trip</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="container">
+                <nav>
+                    <div class="row">
+                        <div class="col-6">
+                            <h3 class="mb-3">Add Trip</h3>
+                        </div>
+                        <div class="col-6">
+                            <div><a href="/welcome"> Home </a><span> | </span><a href="/viewtrip"> View Trip </a><span> | </span><a href="/addtrip"> Add Trip </a>| </span><a href="/logout"> Logout </a></div>
+                        </div>
+                    </div>
+                </nav>
+                <div class="row" style="height: 100px;">
+                    <div class="col-6" >
+                        <h5>NAV LEFT</h5>
+                    </div><!--column-->
+                    <div class="col">
+                    <h5>NAV RIGHT</h5>
+                    </div><!-- column -->  
+                </div><!-- row -->
+        </header>
+        <main>
+            <div class="row">
+                <div class="col-6 m-3">
+                    <div class="col">
+                    <h5>Add a Trip</h5>
+                </div>
+                    <form action="/createtrip" method="post">
+                    {% csrf_token %}
+                        <div class="form-group">
+                            <label for="destination">Destination:</label>
+                            <input type="text" class="form-control" id="destination" name="destination" placeholder="">
+                        </div>
+                        {% for message in messages %}
+                            {% if "destination" in message.tags %}
+                                <p class="errmsg">{{ message }}</p>
+                            {% endif %}
+                        {% endfor %}
+                        <div class="form-group">
+                            <label for="description">Description:</label>
+                            <textarea rows="5" cols="50" class="form-control" id="description" name="description"></textarea>
+                        </div>
+                        {% for message in messages %}
+                            {% if "description" in message.tags %}
+                                <p class="errmsg">{{ message }}</p>
+                            {% endif %}
+                        {% endfor %}
+                        <div class="form-group">
+                            <label for="travel_from">Travel From:</label>
+                            <input type="date" class="form-control" id="travel_from" name="travel_from">
+                        </div>
+                        {% for message in messages %}
+                            {% if "travel_from" in message.tags %}
+                                <p class="errmsg">{{ message }}</p>
+                            {% endif %}
+                        {% endfor %}
+                        <div class="form-group">
+                            <label for="to">Travel To:</label>
+                            <input type="date" class="form-control" id="travel_to" name="travel_to">
+                        </div>
+                        {% for message in messages %}
+                            {% if "travel_to" in message.tags %}
+                                <p class="errmsg">{{ message }}</p>
+                            {% endif %}
+                        {% endfor %}
+                        {% for message in messages %}
+                            {% if "to < from" in message.tags %}
+                                <p class="errmsg">{{ message }}</p>
+                            {% endif %}
+                        {% endfor %}
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                    </form>
+                </div>
+                
+            </div>
+            
+        </main>
+
+         
+       
+            
+    
+    </div><!-- body container -->
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+</body>
+</html>
+

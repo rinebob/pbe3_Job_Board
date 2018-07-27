@@ -1,0 +1,138 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+        *{
+            /* border: 1px solid black; */
+        }
+        /* .mainbox{
+            height: 500px;
+        } */
+        .errmsg{
+            color: red;
+            text-emphasis-style: bold;
+        }
+
+    </style>
+   <title>Belt 3 Welcome </title>
+</head>
+<body>
+    <div class="container">
+         <header>
+            <div class="container">
+                <nav>
+                    <div class="row">
+                        <div class="col-3">
+                                <h3 class="mb-3">Welcome {{request.session.first_name}}!</h3>
+                        </div>
+                        <div class="col-3">
+                             <a href="/logout"> Logout </a>
+                        </div>
+                        <div class="col-5 d-flex justify-content-end"><a href="/display_addjob"> Add Job </a></div>
+                    </div>
+                </nav>
+                <div class="row" style="height: 50px;">
+                    
+                </div><!-- row -->
+        </header>
+        <main>
+            <div class="row">
+                <div class="col-6 m-3">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Location</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for job in jobs %}
+                            <tr>
+                                <td>{{job.title}}</td>
+                                <td>{{job.address}}</td>
+                                <td>
+
+                                    <form action="/display_viewjob" method="post">
+                                    {% csrf_token %}
+                                        <input type="hidden" name="display_viewjob" value={{job.id}}>
+                                        <input type="submit" value="View Job">
+                                    </form>
+                                    <form action="/display_addjob" method="post">
+                                    {% csrf_token %}
+                                        <input type="hidden" name="display_addjob" value={{job.id}}>
+                                        <input type="submit" value="Add Job">
+                                    </form>
+                                </td>
+                                    {% if job.creator.id == request.session.id %}
+                                <td>
+                                    <form action="/display_editjob" method="post">
+                                    {% csrf_token %}
+                                        <input type="hidden" name="display_editjob" value={{job.id}}>
+                                        <input type="submit" value="Edit Job">
+                                    </form>
+                                    <form action="/execute_canceljob" method="post">
+                                    {% csrf_token %}
+                                        <input type="hidden" name="canceljob" value={{job.id}}>
+                                        <input type="submit" value="Cancel Job">
+                                    </form>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-5 m-3">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>My Jobs</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for myjob in myjobs %}
+                            <tr>
+                                <td>{{myjob.title}}</td>
+                                <td>
+                                    <form action="/display_viewjob2" method="post">
+                                    {% csrf_token %}
+                                        <input type="hidden" name="display_viewjob2" value={{myjob.id}}>
+                                        <input type="submit" value="View Job">
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="/execute_jobdone" method="post">
+                                    {% csrf_token %}
+                                        <input type="hidden" name="jobdone" value={{myjob.id}}>
+                                        <input type="submit" value="Done">
+                                    </form>
+                                </td>
+                                
+                                
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+           
+        </main>
+        
+        
+    
+    <!-- container -->
+    </div>
+
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+</body>
+</html>
+
